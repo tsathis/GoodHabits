@@ -18,10 +18,10 @@ public interface HabitDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Habit habit);
 
-    @Query(("SELECT * FROM habit_table"))
+    @Query("SELECT * FROM habit_table")
     LiveData<List<Habit>> getAll();
 
-    @Query(("SELECT * FROM habit_table WHERE habit_table.habit_id == :habitId"))
+    @Query("SELECT * FROM habit_table WHERE habit_table.habit_id == :habitId")
     LiveData<Habit> get(long habitId);
 
     @Update
