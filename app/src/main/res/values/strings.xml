@@ -31,4 +31,6 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="add_new_item">Add new item</string>
+    <string name="habit_name_edit_text">New  Habit…</string>
+    <string name="habit_add_button_text">Add</string>
 </resources>
