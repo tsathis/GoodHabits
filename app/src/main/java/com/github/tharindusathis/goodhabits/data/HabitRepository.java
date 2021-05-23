@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.github.tharindusathis.goodhabits.model.Habit;
 
+import java.util.Date;
 import java.util.List;
 
 public class HabitRepository {
@@ -34,15 +35,23 @@ public class HabitRepository {
     }
 
     public void insertHabit(Habit habit) {
+        sanitizeHabit(habit);
         HabitDatabase.databaseWriteExecutor.execute(() -> habitDao.insert(habit));
     }
 
     public void updateHabit(Habit habit) {
+        sanitizeHabit(habit);
         HabitDatabase.databaseWriteExecutor.execute(() -> habitDao.update(habit));
     }
 
     public void deleteHabit(Habit habit) {
         HabitDatabase.databaseWriteExecutor.execute(() -> habitDao.delete(habit));
+    }
+
+    private void sanitizeHabit(Habit habit) {
+        if(habit.getStartedAt() == null) {
+            habit.setStartedAt(new Date());
+        }
     }
 
 }

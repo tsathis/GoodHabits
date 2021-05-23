@@ -53,8 +53,8 @@ public abstract class HabitDatabase extends RoomDatabase {
                 HabitDao dao = INSTANCE.habitDao();
                 dao.deleteAll();
                 // todo: remove
-                dao.insert(new Habit("A habit",new Date(), new Date()));
-                dao.insert(new Habit("A another habit",new Date(), new Date()));
+                dao.insert(new Habit("A habit",new Date()));
+                dao.insert(new Habit("A another habit",new Date()));
             });
         }
     };

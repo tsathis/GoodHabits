@@ -24,10 +24,19 @@ public class Habit {
     @ColumnInfo(name = "created_at")
     public Date createdDate;
 
+    /**
+     * @deprecated
+     */
     public Habit(@NotNull String title, Date startedAt, Date createdDate) {
         this.title = title;
         this.startedAt = startedAt;
         this.createdDate = createdDate;
+    }
+
+    public Habit(@NotNull String title, Date startedAt) {
+        this.title = title;
+        this.startedAt = startedAt;
+        this.createdDate = new Date();
     }
 
     public Habit() {

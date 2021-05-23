@@ -68,10 +68,7 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
         buttonSaveHabit.setOnClickListener(v -> {
             String title = editTextHabit.getText().toString();
             if (!TextUtils.isEmpty(title)) {
-                Habit newHabit = new Habit();
-                newHabit.setTitle(title);
-                newHabit.setCreatedDate(new Date());
-                newHabit.setCreatedDate(new Date());
+                Habit newHabit = new Habit(title, new Date());
                 HabitAndroidViewModel.insertHabit(newHabit);
             }
         });
