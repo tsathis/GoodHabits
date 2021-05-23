@@ -30,16 +30,16 @@ public class HabitAndroidViewModel extends AndroidViewModel {
         return habitRepository.getHabit(habitId);
     }
 
-    public void insertTask(Habit habit) {
-        habitRepository.insertTask(habit);
+    public static void insertHabit(Habit habit) {
+        habitRepository.insertHabit(habit);
     }
 
-    public void updateTask(Habit habit) {
-        habitRepository.updateTask(habit);
+    public static void updateHabit(Habit habit) {
+        habitRepository.updateHabit(habit);
     }
 
-    public void deleteTask(Habit habit) {
-        habitRepository.deleteTask(habit);
+    public static void deleteHabit(Habit habit) {
+        habitRepository.deleteHabit(habit);
     }
 
 }

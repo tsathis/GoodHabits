@@ -27,15 +27,15 @@ public class HabitRepository {
         return habitDao.get(habitId);
     }
 
-    public void insertTask(Habit habit) {
+    public void insertHabit(Habit habit) {
         HabitDatabase.databaseWriteExecutor.execute(() -> habitDao.insert(habit));
     }
 
-    public void updateTask(Habit habit) {
+    public void updateHabit(Habit habit) {
         HabitDatabase.databaseWriteExecutor.execute(() -> habitDao.update(habit));
     }
 
-    public void deleteTask(Habit habit) {
+    public void deleteHabit(Habit habit) {
         HabitDatabase.databaseWriteExecutor.execute(() -> habitDao.delete(habit));
     }
 
