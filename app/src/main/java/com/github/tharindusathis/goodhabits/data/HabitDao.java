@@ -24,6 +24,9 @@ public interface HabitDao {
     @Query("SELECT * FROM habit_table WHERE habit_table.habit_id == :habitId")
     LiveData<Habit> get(long habitId);
 
+    @Query("SELECT COUNT(habit_id) FROM habit_table")
+    LiveData<Long> count();
+
     @Update
     void update(Habit habit);
 

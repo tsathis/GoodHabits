@@ -12,11 +12,13 @@ public class HabitRepository {
 
     private final HabitDao habitDao;
     private final LiveData<List<Habit>> allHabits;
+    private final LiveData<Long> habitsCounts;
 
     public HabitRepository(Application application) {
         HabitDatabase habitDatabase = HabitDatabase.getDatabase(application);
         this.habitDao = habitDatabase.habitDao();
         this.allHabits = habitDao.getAll();
+        this.habitsCounts = habitDao.count();
     }
 
     public LiveData<List<Habit>> getAllHabits() {
@@ -25,6 +27,10 @@ public class HabitRepository {
 
     public LiveData<Habit> getHabit(long habitId) {
         return habitDao.get(habitId);
+    }
+
+    public LiveData<Long> countHabits() {
+        return habitsCounts;
     }
 
     public void insertHabit(Habit habit) {

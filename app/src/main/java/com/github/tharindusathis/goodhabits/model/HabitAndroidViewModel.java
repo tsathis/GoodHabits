@@ -30,6 +30,10 @@ public class HabitAndroidViewModel extends AndroidViewModel {
         return habitRepository.getHabit(habitId);
     }
 
+    public LiveData<Long> countHabits() {
+        return habitRepository.countHabits();
+    }
+
     public static void insertHabit(Habit habit) {
         habitRepository.insertHabit(habit);
     }
