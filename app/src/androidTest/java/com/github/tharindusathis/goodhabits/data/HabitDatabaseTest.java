@@ -40,7 +40,8 @@ public class HabitDatabaseTest {
         db.close();
     }
 
-    @Rule public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Test
     public void writeUserAndReadInList() {
@@ -52,8 +53,6 @@ public class HabitDatabaseTest {
         habitDao.insert(habit);
         LiveData<List<Habit>> habits = habitDao.getAll();
         habits.observeForever(habitList -> {
-            System.out.println(habitList.size());
-            System.out.println("Hihih");
             assertNotNull(habitList.get(0));
             assertEquals(habitList.get(0), habit);
         });
