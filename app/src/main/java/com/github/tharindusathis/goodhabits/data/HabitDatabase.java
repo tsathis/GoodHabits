@@ -52,9 +52,11 @@ public abstract class HabitDatabase extends RoomDatabase {
                 // Populate the database in the background.
                 HabitDao dao = INSTANCE.habitDao();
                 dao.deleteAll();
-                // todo: remove
-                dao.insert(new Habit("A habit",new Date()));
-                dao.insert(new Habit("A another habit",new Date()));
+                // todo: remove [DEMO ONLY]
+                dao.insert(new Habit("Get up before 6", new Date(System.currentTimeMillis() - (long) 5 * 3600 * 1000)));
+                dao.insert(new Habit("Meditate twice a daily \uD83E\uDDD8", new Date(System.currentTimeMillis() - (long) 10 * 24 * 3600 * 1000)));
+                dao.insert(new Habit("\uD83D\uDE34 sleep before 10", new Date(System.currentTimeMillis() - (long) 30 * 24 * 3600 * 1000)));
+                dao.insert(new Habit("Read a book daily", new Date(System.currentTimeMillis() - (long) 2 * 24 * 3600 * 1000)));
             });
         }
     };

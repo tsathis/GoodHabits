@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.tharindusathis.goodhabits.R;
 import com.github.tharindusathis.goodhabits.model.Habit;
+import com.github.tharindusathis.goodhabits.util.ProgressTimeFormatter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -60,20 +61,13 @@ public class HabitRecyclerViewAdapter extends RecyclerView.Adapter<HabitRecycler
             super(itemView);
             textViewHabitTitle = itemView.findViewById(R.id.text_habit_title);
             textHabitProgressTimer = itemView.findViewById(R.id.text_habit_progress_timer);
+            textViewHabitTitle.setText("");
+            textHabitProgressTimer.setText("");
         }
 
         public void setHabitProgressTime(long timeInMillis) {
             if (textHabitProgressTimer != null) {
-                long seconds = timeInMillis / 1000;
-                long minutes = seconds / 60;
-                long hours = minutes / 60;
-                long days = hours / 24;
-                String time = String.format(
-                        Locale.ENGLISH,
-                        "%dd %dh %dm %ds",
-                        days, hours % 24, minutes % 60, seconds % 60
-                );
-                textHabitProgressTimer.setText(time);
+                textHabitProgressTimer.setText(ProgressTimeFormatter.parse(timeInMillis));
             }
         }
 
