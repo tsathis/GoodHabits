@@ -82,8 +82,8 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
 
                 Snackbar
                         .make(requireActivity().findViewById(R.id.fab_add_habit),
-                                R.string.habit_added_notification, Snackbar.LENGTH_SHORT)
-                        .setAction(R.string.habit_added_action_text, null)
+                                R.string.habit_added_notification, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.habit_added_action_text, new BottomSheetUndoListener())
                         .show();
 
             }
@@ -100,4 +100,11 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
         editTextHabit.setText("");
     }
 
+    public class BottomSheetUndoListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            System.out.println("TODO: undo ");
+        }
+    }
 }
