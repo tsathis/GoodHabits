@@ -3,10 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/habitBottomSheetConstraintLayout"
-    style="@style/Animation.Design.BottomSheetDialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
     app:behavior_hideable="true"
     app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
@@ -15,12 +13,13 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/email_card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap_2x">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/gap_2x"
+
             android:layout_marginBottom="@dimen/gap_2x"
             android:orientation="vertical">
 

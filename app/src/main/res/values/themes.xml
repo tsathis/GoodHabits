@@ -24,7 +24,12 @@
         <item name="android:navigationBarColor">@color/nav_bar</item>
 
         <!-- Customize your theme here. -->
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <!-- <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>-->
+
+        <!-- shapes -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Default.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Default.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Default.LargeComponent</item>
 
         <!--Typography-->
         <item name="textAppearanceHeadline2">@style/TextAppearance.Default.Headline2</item>
