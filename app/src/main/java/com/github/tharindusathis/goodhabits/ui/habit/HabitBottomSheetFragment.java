@@ -15,10 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import com.github.tharindusathis.goodhabits.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Date;
@@ -35,7 +34,8 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
     private HabitViewModel habitViewModel;
 
     private EditText editTextHabit;
-    private FloatingActionButton fabSaveHabit;
+    private ImageButton buttonSaveHabit;
+    private ImageButton buttonDiscard;
 
     public HabitBottomSheetFragment() {
     }
@@ -48,7 +48,8 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
         View root = inflater.inflate(R.layout.fragment_habit_bottom_sheet, container, false);
 
         editTextHabit = root.findViewById(R.id.edit_text_habit_bottom_sheet);
-        fabSaveHabit = root.findViewById(R.id.fab_save_habit_bottom_sheet);
+        buttonSaveHabit = root.findViewById(R.id.button_save_bottom_sheet);
+        buttonDiscard = root.findViewById(R.id.button_discard_bottom_sheet);
 
         habitViewModel = new ViewModelProvider(requireActivity()).get(HabitViewModel.class);
 
@@ -69,7 +70,7 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fabSaveHabit.setOnClickListener(v -> {
+        buttonSaveHabit.setOnClickListener(v -> {
             String title = editTextHabit.getText().toString();
             if (!TextUtils.isEmpty(title)) {
                 Habit newHabit = new Habit(title, new Date());
@@ -88,7 +89,15 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
             }
         });
 
+        buttonDiscard.setOnClickListener(v -> {
+            this.dismiss();
+            discard();
+        });
 
+    }
+
+    private void discard() {
+        editTextHabit.setText("");
     }
 
 }
