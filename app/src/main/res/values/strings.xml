@@ -31,6 +31,10 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="add_new_item">Add new item</string>
+    <string name="save_item">Save item</string>
     <string name="habit_name_edit_text">New  Habit…</string>
     <string name="habit_add_button_text">Add</string>
+    <string name="habit_added_notification">New habit added!</string>
+    <string name="habit_added_action_text">Okay</string>
+    <string name="habit_title_label">I commit to grow the habit:</string>
 </resources>

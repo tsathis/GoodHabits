@@ -4,20 +4,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
 import com.github.tharindusathis.goodhabits.R;
 import com.github.tharindusathis.goodhabits.ui.habit.HabitBottomSheetFragment;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -40,17 +37,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         habitBottomSheetFragment = new HabitBottomSheetFragment();
-        ConstraintLayout habitBottomSheetConstraintLayout = findViewById(R.id.habitBottomSheetConstraintLayout);
-        if(habitBottomSheetConstraintLayout != null) {
-            BottomSheetBehavior<ConstraintLayout> habitBottomSheetBehavior =
-                    BottomSheetBehavior.from(habitBottomSheetConstraintLayout);
-            habitBottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
-        }else{
-            System.out.println("Btt");
-        }
+        CoordinatorLayout habitBottomSheetConstraintLayout = findViewById(R.id.habitBottomSheetConstraintLayout);
+        BottomSheetBehavior<CoordinatorLayout> habitBottomSheetBehavior =
+                BottomSheetBehavior.from(habitBottomSheetConstraintLayout);
+        habitBottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab_add_habit);
         fab.setOnClickListener(view -> habitBottomSheetFragment.show(getSupportFragmentManager(), habitBottomSheetFragment.getTag()));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

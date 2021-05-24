@@ -1,34 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/habitBottomSheetConstraintLayout"
-style="@style/Animation.Design.BottomSheetDialog"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="#fff"
-app:behavior_hideable="false"
-app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
-app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    style="@style/Animation.Design.BottomSheetDialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:context=".ui.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="20dp"
         >
         <TextView
             android:id="@+id/text_habits_bottom_sheet"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp" />
+            android:text="@string/habit_title_label" />
 
         <EditText
             android:id="@+id/edit_text_habit_bottom_sheet"
@@ -39,13 +36,16 @@ app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior
             android:hint="@string/habit_name_edit_text"
             android:importantForAutofill="no" />
 
-        <Button
-            android:id="@+id/button_save_habit_bottom_sheet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/habit_add_button_text" />
-
-
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_save_habit_bottom_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_fab_save"
+        android:contentDescription="@string/save_item" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

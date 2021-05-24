@@ -18,7 +18,7 @@ public interface HabitDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Habit habit);
 
-    @Query("SELECT * FROM habit_table")
+    @Query("SELECT * FROM habit_table ORDER BY habit_table.created_at DESC")
     LiveData<List<Habit>> getAll();
 
     @Query("SELECT * FROM habit_table WHERE habit_table.habit_id == :habitId")
