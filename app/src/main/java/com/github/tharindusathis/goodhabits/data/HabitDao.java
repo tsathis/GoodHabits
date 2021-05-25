@@ -35,4 +35,7 @@ public interface HabitDao {
 
     @Query("DELETE FROM habit_table")
     void deleteAll();
+
+    @Query("DELETE FROM habit_table WHERE habit_table.created_at == (SELECT MAX(habit_table.created_at) FROM habit_table)")
+    void deleteLastAdded();
 }

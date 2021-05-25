@@ -73,6 +73,104 @@
                 app:srcCompat="@drawable/ic_save"
                 app:tint="?attr/colorPrimary" />
 
+            <ImageView
+                android:id="@+id/divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_habit_bottom_sheet"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/gap_1x"
+                android:layout_marginHorizontal="@dimen/gap_2x"
+                android:background="@drawable/divider"
+                app:backgroundTint="@color/color_on_surface_divider"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/label_starting_at_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_2x"
+                android:text="@string/label_starting_at_input"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/scroll_view_starting_at"
+                app:layout_constraintBottom_toBottomOf="@id/scroll_view_starting_at"
+                android:textAppearance="?attr/textAppearanceButton" />
+
+            <HorizontalScrollView
+                android:id="@+id/scroll_view_starting_at"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_1x"
+                android:layout_marginEnd="@dimen/gap_2x"
+                android:minHeight="48dp"
+                android:paddingVertical="@dimen/gap_quarter"
+                android:clipToPadding="false"
+                android:scrollbars="none"
+                android:requiresFadingEdge="horizontal"
+                android:fadingEdgeLength="@dimen/gap_3x"
+                android:overScrollMode="never"
+                android:contentDescription="@string/scroll_view_starting_at_desc"
+
+                app:layout_constraintStart_toEndOf="@id/label_starting_at_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_1">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_starting_at"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/gap_2x"
+                    android:paddingEnd="@dimen/gap_2x"
+                    android:scrollbars="none"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_choice_now"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/chip_choice_now"
+                        android:checked="true"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_choice_yesterday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/chip_choice_yesterday"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_choice_last_week"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/chip_choice_last_week"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_choice_calendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:chipIcon="@drawable/ic_calendar"
+                        app:iconStartPadding="@dimen/gap_1x"
+                        android:text="@string/chip_choice_calendar"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <CalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/scroll_view_starting_at"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

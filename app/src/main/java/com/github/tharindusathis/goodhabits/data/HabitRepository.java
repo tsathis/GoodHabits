@@ -48,6 +48,10 @@ public class HabitRepository {
         HabitDatabase.databaseWriteExecutor.execute(() -> habitDao.delete(habit));
     }
 
+    public void deleteLastAddedHabit() {
+        HabitDatabase.databaseWriteExecutor.execute(habitDao::deleteLastAdded);
+    }
+
     private void sanitizeHabit(Habit habit) {
         if(habit.getStartedAt() == null) {
             habit.setStartedAt(new Date());

@@ -46,4 +46,8 @@ public class HabitAndroidViewModel extends AndroidViewModel {
         habitRepository.deleteHabit(habit);
     }
 
+    public static void deleteLastAddedHabit() {
+        habitRepository.deleteLastAddedHabit();
+    }
+
 }
