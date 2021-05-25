@@ -36,6 +36,12 @@
     <string name="habit_add_button_text">Add</string>
     <string name="habit_added_notification">New habit added!</string>
     <string name="habit_added_action_text">Undo</string>
+    <string name="dimiss_action_text">Dismiss</string>
+    <string name="string_account">account</string>
     <string name="habit_title_label">I commit to grow the habit:</string>
     <string name="text_dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+
+    <!-- config -->
+    <string name="your_web_client_id">todo-add.apps.googleusercontent.com</string>
+
 </resources>

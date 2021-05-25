@@ -3,16 +3,25 @@ package com.github.tharindusathis.goodhabits.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.widget.Toast;
 
 import com.github.tharindusathis.goodhabits.R;
 import com.github.tharindusathis.goodhabits.ui.habit.HabitBottomSheetFragment;
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.Identity;
+import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.IntentSenderRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.navigation.NavController;
@@ -26,8 +35,16 @@ import androidx.preference.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "ACTIVITY_MAIN";
+
     private AppBarConfiguration mAppBarConfiguration;
+    FloatingActionButton fab;
+    Snackbar snackbar;
     private HabitBottomSheetFragment habitBottomSheetFragment;
+
+    private SignInClient oneTapClient;
+    private BeginSignInRequest signInRequest, signUpRequest;
+    ActivityResultLauncher<IntentSenderRequest> signInResultHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         habitBottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
 
 
-        FloatingActionButton fab = findViewById(R.id.fab_add_habit);
+        fab = findViewById(R.id.fab_add_habit);
         fab.setOnClickListener(view -> habitBottomSheetFragment.show(getSupportFragmentManager(), habitBottomSheetFragment.getTag()));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -67,23 +84,68 @@ public class MainActivity extends AppCompatActivity {
         if(users_name != null){
             Toast.makeText(this, String.format("Hello %s", users_name) , Toast.LENGTH_SHORT).show();
         }
+
+        oneTapClient = Identity.getSignInClient(this);
+        signInRequest = BeginSignInRequest.builder()
+                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                        .setSupported(true)
+                        .setServerClientId(getString(R.string.your_web_client_id))
+                        .setFilterByAuthorizedAccounts(true)
+                        .build())
+                .build();
+        signUpRequest = BeginSignInRequest.builder()
+                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                        .setSupported(false)
+                        .setServerClientId(getString(R.string.your_web_client_id))
+                        .setFilterByAuthorizedAccounts(true)
+                        .build())
+                .build();
+        signInResultHandler = registerForActivityResult(
+                new ActivityResultContracts.StartIntentSenderForResult(), result -> {
+                    if(result.getResultCode() == RESULT_OK){
+                        Log.d(TAG, "RESULT_OK");
+                    }else if(result.getResultCode() == RESULT_CANCELED){
+                        Log.d(TAG, "RESULT_CANCELED");
+                    }else if(result.getResultCode() == RESULT_FIRST_USER) {
+                        Log.d(TAG, "RESULT_FIRST_USER");
+                    }
+                }
+        );
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.account, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_settings) {
             Intent intent = new Intent(MainActivity.this,
                     SettingsActivity.class);
-//            intent.putExtra(EXTRA_MESSAGE, mOrderMessage);
+            // intent.putExtra(EXTRA_MESSAGE, mOrderMessage);
             startActivity(intent);
             return true;
+        }else if(itemId == R.id.account) {
+            oneTapClient
+                    .beginSignIn(signUpRequest)
+                    .addOnSuccessListener(this, result ->
+                            signInResultHandler.launch(
+                                    new IntentSenderRequest
+                                            .Builder(result.getPendingIntent())
+                                            .build()
+                            )
+                    )
+                    .addOnFailureListener(this, exception -> {
+                        Log.d(TAG, exception.getLocalizedMessage());
+                        snackbar = Snackbar.make(fab, "Error! " + exception.getLocalizedMessage(),
+                                BaseTransientBottomBar.LENGTH_INDEFINITE)
+                                .setAction(R.string.dimiss_action_text, v -> dismissSnackbar());
+                        snackbar.show();
+                    });
         }
         return super.onOptionsItemSelected(item);
     }
@@ -93,5 +155,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void dismissSnackbar() {
+        snackbar.dismiss();
     }
 }
