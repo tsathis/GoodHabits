@@ -34,6 +34,10 @@ public class HabitRepository {
         return habitsCounts;
     }
 
+    public LiveData<Habit> getFirstStartedHabit() {
+        return habitDao.getFirstStarted();
+    }
+
     public void insertHabit(Habit habit) {
         sanitizeHabit(habit);
         HabitDatabase.databaseWriteExecutor.execute(() -> habitDao.insert(habit));

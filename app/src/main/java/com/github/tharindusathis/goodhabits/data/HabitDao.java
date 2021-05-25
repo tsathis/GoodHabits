@@ -27,6 +27,9 @@ public interface HabitDao {
     @Query("SELECT COUNT(habit_id) FROM habit_table")
     LiveData<Long> count();
 
+    @Query("SELECT * FROM habit_table WHERE habit_table.started_at == (SELECT MIN(habit_table.started_at) FROM habit_table)")
+    LiveData<Habit> getFirstStarted();
+
     @Update
     void update(Habit habit);
 

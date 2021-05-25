@@ -6,35 +6,136 @@
     android:layout_height="match_parent"
     tools:context=".ui.stats.StatsFragment">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/elevation_00"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardPreventCornerOverlap="false"
+
+        android:layout_marginVertical="@dimen/gap_quarter"
+        android:layout_marginHorizontal="@dimen/gap_half"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <TextView
-            android:id="@+id/text_stats"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"/>
+            android:paddingTop="@dimen/gap_2x"
+            android:paddingBottom="@dimen/gap_2x">
 
-        <TextView
-            android:id="@+id/text_habits_count"
+            <TextView
+                android:id="@+id/textTitleCard1"
+                android:textAppearance="?attr/textAppearanceSearchResultTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_1x"
+                android:layout_marginStart="@dimen/gap_2x"
+                android:layout_marginEnd="@dimen/gap_2x"
+                android:text="@string/text_dummy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/textHeadingCard1"/>
+
+            <TextView
+                android:id="@+id/textHeadingCard1"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_1x"
+                android:layout_marginEnd="@dimen/gap_2x"
+                android:layout_marginStart="@dimen/gap_2x"
+                android:text="@string/text_dummy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textTitleCard1"/>
+
+            <TextView
+                android:id="@+id/textBodyCard1"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_1x"
+                android:layout_marginStart="@dimen/gap_2x"
+                android:layout_marginEnd="@dimen/gap_2x"
+                android:text="@string/text_dummy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textHeadingCard1"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/elevation_00"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardPreventCornerOverlap="false"
+
+        android:layout_marginVertical="@dimen/gap_quarter"
+        android:layout_marginHorizontal="@dimen/gap_half"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"/>
+            android:paddingTop="@dimen/gap_2x"
+            android:paddingBottom="@dimen/gap_2x">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textTitleCard2"
+                android:textAppearance="?attr/textAppearanceSearchResultTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_1x"
+                android:layout_marginStart="@dimen/gap_2x"
+                android:layout_marginEnd="@dimen/gap_2x"
+                android:text="@string/text_dummy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/textHeadingCard2"/>
+
+            <TextView
+                android:id="@+id/textHeadingCard2"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_1x"
+                android:layout_marginEnd="@dimen/gap_2x"
+                android:layout_marginStart="@dimen/gap_2x"
+                android:text="@string/text_dummy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textTitleCard2"/>
+
+            <TextView
+                android:id="@+id/textBodyCard2"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_1x"
+                android:layout_marginStart="@dimen/gap_2x"
+                android:layout_marginEnd="@dimen/gap_2x"
+                android:text="@string/text_dummy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textHeadingCard2"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

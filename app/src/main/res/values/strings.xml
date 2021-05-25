@@ -40,7 +40,17 @@
     <string name="dimiss_action_text">Dismiss</string>
     <string name="string_account">account</string>
     <string name="habit_title_label">I commit to grow the habit:</string>
-    <string name="text_dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="text_dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod </string>
+
+    <string name="label_starting_at_input">Started</string>
+    <string name="scroll_view_starting_at_desc">Set starting time of habit</string>
+    <string name="chip_choice_last_week">Last Week</string>
+    <string name="chip_choice_calendar">Custom</string>
+    <string name="chip_choice_yesterday">Yesterday</string>
+    <string name="chip_choice_now">Now</string>
+    <string name="stats_total">Total Habits</string>
+    <string name="stats_good_feedback">Yeah, we are on a good track!</string>
+    <string name="stats_best_performance_title">Best Performance</string>
 
     <!-- config -->
     <string name="your_web_client_id">todo-add.apps.googleusercontent.com</string>
