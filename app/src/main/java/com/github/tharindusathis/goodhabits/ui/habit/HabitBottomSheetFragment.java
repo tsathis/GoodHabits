@@ -1,5 +1,6 @@
 package com.github.tharindusathis.goodhabits.ui.habit;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,8 +23,13 @@ import com.github.tharindusathis.goodhabits.R;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>A fragment that shows a list of items as a modal bottom sheet.</p>
@@ -42,6 +48,7 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
 
     private CalendarView calendarView;
     private Chip chipChoiceNow, chipChoiceYesterday, chipChoiceLastWeek, chipChoiceCalendar;
+    private List<View> groupEditStartedAt;
 
     Calendar calendar = Calendar.getInstance();
     private Date dateStartedAt;
@@ -60,6 +67,11 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
         buttonSaveHabit = root.findViewById(R.id.button_save_bottom_sheet);
         buttonDiscard = root.findViewById(R.id.button_discard_bottom_sheet);
         calendarView = root.findViewById(R.id.calendar_view);
+        groupEditStartedAt = Arrays.asList(
+                calendarView,
+                root.findViewById(R.id.label_starting_at_input),
+                root.findViewById(R.id.scroll_view_starting_at)
+        );
 
 
         chipChoiceNow = root.findViewById(R.id.chip_choice_now);
@@ -69,26 +81,32 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
 
         habitViewModel = new ViewModelProvider(requireActivity()).get(HabitViewModel.class);
 
-        /*
-        private TextView textViewHabit;
-        textViewHabit = root.findViewById(R.id.text_habits_bottom_sheet);
-        habitViewModel.getText().observe(getViewLifecycleOwner(), s -> textViewHabit.setText(s));
-        */
-
-        init();
         return root;
     }
 
-    private void init() {
+    private void reset() {
+        for (View view : groupEditStartedAt) {
+            view.setVisibility(View.VISIBLE);
+        }
         calendarView.setVisibility(View.GONE);
         dateStartedAt = new Date();
         editTextHabit.setText("");
         editTextHabit.setError(null);
+        habitViewModel.setHabit(null);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if (habitViewModel.getSelectedHabit().getValue() != null) {
+            Habit editingHabit = habitViewModel.getSelectedHabit().getValue();
+            editTextHabit.setText(editingHabit.getTitle());
+            for (View view : groupEditStartedAt) {
+                view.setVisibility(View.GONE);
+            }
+        }else{
+            reset();
+        }
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -97,19 +115,28 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
         buttonSaveHabit.setOnClickListener(v -> {
             String title = editTextHabit.getText().toString().trim();
             if (!TextUtils.isEmpty(title)) {
-                Habit newHabit = new Habit(title, dateStartedAt);
-                HabitAndroidViewModel.insertHabit(newHabit);
+                if (!habitViewModel.isEditing()) {
+                    Habit newHabit = new Habit(title, dateStartedAt);
+                    HabitAndroidViewModel.insertHabit(newHabit);
+                    Snackbar
+                            .make(requireActivity().findViewById(R.id.fab_add_habit),
+                                    R.string.habit_added_notification, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.undo_action_text, v_ -> HabitAndroidViewModel.deleteLastAddedHabit())
+                            .show();
+                } else {
+                    Habit editingHabit = habitViewModel.getSelectedHabit().getValue();
+                    Objects.requireNonNull(editingHabit).setTitle(title);
+                    HabitAndroidViewModel.updateHabit(editingHabit);
+                    Snackbar
+                            .make(requireActivity().findViewById(R.id.fab_add_habit),
+                                    R.string.habit_updated_notification, Snackbar.LENGTH_LONG)
+                            .show();
+                }
                 Utils.hideSoftKeyboard(v);
                 if (this.isVisible()) {
                     this.dismiss();
                 }
-
-                Snackbar
-                        .make(requireActivity().findViewById(R.id.fab_add_habit),
-                                R.string.habit_added_notification, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.habit_added_action_text, v_ -> HabitAndroidViewModel.deleteLastAddedHabit())
-                        .show();
-                init();
+                reset();
             } else {
                 editTextHabit.requestFocus();
             }
@@ -117,7 +144,7 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
 
         buttonDiscard.setOnClickListener(v -> {
             this.dismiss();
-            init();
+            reset();
         });
 
         calendarView.setOnDateChangeListener((view_, year, month, dayOfMonth) -> {
@@ -148,5 +175,11 @@ public class HabitBottomSheetFragment extends BottomSheetDialogFragment {
         chipChoiceYesterday.setOnClickListener(startedAtChoiceChipOnClickListener);
         chipChoiceLastWeek.setOnClickListener(startedAtChoiceChipOnClickListener);
         chipChoiceCalendar.setOnClickListener(startedAtChoiceChipOnClickListener);
+    }
+
+    @Override
+    public void onDismiss(@NonNull @NotNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        reset();
     }
 }

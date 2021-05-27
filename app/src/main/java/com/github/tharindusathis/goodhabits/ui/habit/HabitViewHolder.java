@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
-public class HabitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class HabitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
     public TextView textViewHabitTitle;
     public TextView textHabitProgressTimer;
@@ -34,6 +34,7 @@ public class HabitViewHolder extends RecyclerView.ViewHolder implements View.OnC
         this.habitRecyclerViewAdapter = habitRecyclerViewAdapter;
         this.onHabitClickListener = habitRecyclerViewAdapter.getOnHabitClickListener();
         itemView.findViewById(R.id.habit_row_card_layout).setOnClickListener(this);
+        itemView.findViewById(R.id.habit_row_card_layout).setOnLongClickListener(this);
     }
 
     public void setHabitProgressTime(long timeInMillis) {
@@ -66,6 +67,20 @@ public class HabitViewHolder extends RecyclerView.ViewHolder implements View.OnC
         if (itemId == R.id.habit_row_card_layout) {
             onHabitClickListener.onHabitClick(currentHabit);
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        int itemId = v.getId();
+        Habit currentHabit = habitRecyclerViewAdapter
+                .getHabitList()
+                .get(getAbsoluteAdapterPosition());
+
+        if (itemId == R.id.habit_row_card_layout) {
+            onHabitClickListener.onHabitLongClick(currentHabit);
+            return true;
+        }
+        return false;
     }
 
     public class HabitProgressTimer extends CountDownTimer {

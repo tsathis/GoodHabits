@@ -42,7 +42,10 @@
     <string name="habit_name_edit_text">New  Habit…</string>
     <string name="habit_add_button_text">Add</string>
     <string name="habit_added_notification">New habit added!</string>
-    <string name="habit_added_action_text">Undo</string>
+    <string name="habit_updated_notification">Habit updated!</string>
+    <string name="habit_deleted_notification">Habit deleted!</string>
+    <string name="habit_progress_reset_notification">Habit progress reset!</string>
+    <string name="undo_action_text">Undo</string>
     <string name="dimiss_action_text">Dismiss</string>
     <string name="string_account">account</string>
     <string name="habit_title_label">I commit to grow the habit:</string>

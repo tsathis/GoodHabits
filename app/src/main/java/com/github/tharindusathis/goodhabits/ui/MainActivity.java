@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.github.tharindusathis.goodhabits.R;
 import com.github.tharindusathis.goodhabits.ui.habit.HabitBottomSheetFragment;
+import com.github.tharindusathis.goodhabits.ui.habit.HabitViewModel;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
@@ -25,6 +26,7 @@ import androidx.activity.result.IntentSenderRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 BottomSheetBehavior.from(habitBottomSheetConstraintLayout);
         habitBottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
 
+        new ViewModelProvider(this)
+                .get(HabitViewModel.class)
+                .setHabitBottomSheetFragment(habitBottomSheetFragment);
 
         fab = findViewById(R.id.fab_add_habit);
         fab.setOnClickListener(view -> habitBottomSheetFragment.show(getSupportFragmentManager(), habitBottomSheetFragment.getTag()));
@@ -84,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         // reading the changed settings value from shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String usersName = sharedPreferences.getString(SettingsActivity.KEY_PREF_USERS_NAME, null);
-        TextView textViewSmallNavHeader = (TextView) navigationView.getHeaderView(0).findViewById(R.id.text_view_small_nav_header);
+        TextView textViewSmallNavHeader = navigationView.getHeaderView(0).findViewById(R.id.text_view_small_nav_header);
         if (usersName != null && usersName.trim().length() > 0) {
             textViewSmallNavHeader.setText(String.format("Signed in as %s", usersName));
             textViewSmallNavHeader.setVisibility(View.VISIBLE);
@@ -152,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     )
                     .addOnFailureListener(this, exception -> {
                         Log.d(TAG, exception.getLocalizedMessage());
-                        snackbar = Snackbar.make(fab, "Error! " + exception.getLocalizedMessage(),
+                        snackbar = Snackbar.make(fab, "SignIn Error! " + exception.getLocalizedMessage(),
                                 BaseTransientBottomBar.LENGTH_INDEFINITE)
                                 .setAction(R.string.dimiss_action_text, v -> dismissSnackbar());
                         snackbar.show();

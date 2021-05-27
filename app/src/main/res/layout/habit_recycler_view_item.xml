@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:elevation="@dimen/elevation_00"
         android:clickable="true"
+        android:longClickable="true"
         android:focusable="true"
         app:cardPreventCornerOverlap="false">
 

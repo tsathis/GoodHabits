@@ -14,6 +14,12 @@
         <item>MODE_NIGHT_AUTO_BATTERY</item>
     </string-array>
 
+    <string-array name="habit_popup_menu_items">
+        <item>Reset Progress</item>
+        <item>Edit Habit</item>
+        <item>Delete Habit</item>
+    </string-array>
+
     <!-- font certifications -->
     <array name="com_google_android_gms_fonts_certs">
         <item>@array/com_google_android_gms_fonts_certs_dev</item>
