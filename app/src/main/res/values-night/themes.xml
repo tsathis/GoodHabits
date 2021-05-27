@@ -1,17 +1,32 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.GoodHabits" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+    <style name="Theme.GoodHabits.DayNight" parent="Theme.GoodHabits.Dark"/>
+
+    <style name="Theme.GoodHabits.Dark" parent="Theme.GoodHabits">
+
+        <!--Color-->
+        <item name="colorPrimary">@color/color_palette_blue_200</item>
+        <item name="colorPrimaryVariant">@color/color_palette_blue_300</item>
+        <item name="colorSecondary">@color/color_palette_orange_300</item>
+        <item name="colorSecondaryVariant">@color/color_palette_orange_300</item>
+
+        <item name="android:colorBackground">@color/color_palette_black_900</item>
+        <item name="colorSurface">@color/color_palette_black_800</item>
+        <item name="colorPrimarySurfaceVariant">?attr/colorSurface</item>
+        <item name="colorError">@color/color_palette_red_200</item>
+
+        <item name="colorOnPrimary">@color/color_palette_black_900</item>
+        <item name="colorOnSecondary">@color/color_palette_black_900</item>
+        <item name="colorOnBackground">@color/color_palette_white_50</item>
+        <item name="colorOnSurface">@color/color_palette_white_50</item>
+        <item name="colorOnError">@color/color_palette_black_900</item>
+
+        <item name="scrimBackground">@color/color_palette_black_900_alpha_087</item>
+        <item name="android:statusBarColor">@color/color_palette_black_800</item>
+
+        <item name="elevationOverlayEnabled">true</item>
+
+        <!--System/Platform attributes-->
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
     </style>
 </resources>

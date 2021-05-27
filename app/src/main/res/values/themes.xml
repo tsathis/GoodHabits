@@ -1,4 +1,7 @@
 <resources>
+
+    <style name="Theme.GoodHabits.DayNight" parent="Theme.GoodHabits"/>
+
     <!-- Base application theme. -->
     <style name="Theme.GoodHabits" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
@@ -54,7 +57,7 @@
         <item name="motionInterpolatorOutgoing">@android:interpolator/accelerate_cubic</item>
     </style>
 
-    <style name="Theme.GoodHabits.NoActionBar">
+    <style name="Theme.GoodHabits.NoActionBar" parent="Theme.GoodHabits.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

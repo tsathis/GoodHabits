@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.Menu;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
 import com.github.tharindusathis.goodhabits.R;
 import com.github.tharindusathis.goodhabits.ui.habit.HabitBottomSheetFragment;
@@ -32,6 +33,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.PreferenceManager;
+
+import static com.github.tharindusathis.goodhabits.util.Utils.setThemeNightMode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,10 +83,18 @@ public class MainActivity extends AppCompatActivity {
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
         // reading the changed settings value from shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String users_name = sharedPreferences.getString(SettingsActivity.KEY_PREF_USERS_NAME, null);
-        if(users_name != null){
-            Toast.makeText(this, String.format("Hello %s", users_name) , Toast.LENGTH_SHORT).show();
+        String usersName = sharedPreferences.getString(SettingsActivity.KEY_PREF_USERS_NAME, null);
+        TextView textViewSmallNavHeader = (TextView) navigationView.getHeaderView(0).findViewById(R.id.text_view_small_nav_header);
+        if (usersName != null && usersName.trim().length() > 0) {
+            textViewSmallNavHeader.setText(String.format("Signed in as %s", usersName));
+            textViewSmallNavHeader.setVisibility(View.VISIBLE);
+        }else {
+            textViewSmallNavHeader.setVisibility(View.GONE);
         }
+
+        final String[] prefThemeValues = getResources().getStringArray(R.array.theme_values);
+        String prefTheme = sharedPreferences.getString(getString(R.string.pref_theme), prefThemeValues[0]);
+        setThemeNightMode(prefThemeValues, prefTheme);
 
         oneTapClient = Identity.getSignInClient(this);
         signInRequest = BeginSignInRequest.builder()
