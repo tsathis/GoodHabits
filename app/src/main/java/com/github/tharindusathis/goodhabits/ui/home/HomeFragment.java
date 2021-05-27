@@ -1,10 +1,10 @@
 package com.github.tharindusathis.goodhabits.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,10 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.tharindusathis.goodhabits.R;
+import com.github.tharindusathis.goodhabits.model.Habit;
 import com.github.tharindusathis.goodhabits.model.HabitAndroidViewModel;
 import com.github.tharindusathis.goodhabits.ui.habit.HabitRecyclerViewAdapter;
+import com.github.tharindusathis.goodhabits.ui.habit.OnHabitClickListener;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements OnHabitClickListener {
+
+    private static final String TAG = "HOME_FRAGMENT";
 
     private RecyclerView habitRecyclerView;
     private HabitRecyclerViewAdapter habitRecyclerViewAdapter;
@@ -44,11 +48,17 @@ public class HomeFragment extends Fragment {
         habitAndroidViewModel
                 .getAllHabits()
                 .observe(requireActivity(), habits -> {
-                            habitRecyclerViewAdapter = new HabitRecyclerViewAdapter(habits);
+                            habitRecyclerViewAdapter = new HabitRecyclerViewAdapter(habits, this);
                             habitRecyclerView.setAdapter(habitRecyclerViewAdapter);
                         }
                 );
 
         return root;
+    }
+
+    @Override
+    public void onHabitClick(Habit habit) {
+        System.out.println("CLicked");
+        Log.d(TAG,"Clicked: " + habit);
     }
 }

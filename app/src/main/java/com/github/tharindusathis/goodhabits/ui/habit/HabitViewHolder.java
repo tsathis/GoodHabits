@@ -7,25 +7,33 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.tharindusathis.goodhabits.R;
+import com.github.tharindusathis.goodhabits.model.Habit;
 import com.github.tharindusathis.goodhabits.util.ProgressTimeFormatter;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
-public class HabitViewHolder extends RecyclerView.ViewHolder {
+public class HabitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView textViewHabitTitle;
     public TextView textHabitProgressTimer;
 
     public CountDownTimer habitProgressTimer;
 
-    public HabitViewHolder(@NotNull View itemView) {
+    final OnHabitClickListener onHabitClickListener;
+    final HabitRecyclerViewAdapter habitRecyclerViewAdapter;
+
+    public HabitViewHolder(@NotNull View itemView, HabitRecyclerViewAdapter habitRecyclerViewAdapter) {
         super(itemView);
         textViewHabitTitle = itemView.findViewById(R.id.text_habit_title);
         textHabitProgressTimer = itemView.findViewById(R.id.text_habit_progress_timer);
         textViewHabitTitle.setText("");
         textHabitProgressTimer.setText("");
+
+        this.habitRecyclerViewAdapter = habitRecyclerViewAdapter;
+        this.onHabitClickListener = habitRecyclerViewAdapter.getOnHabitClickListener();
+        itemView.findViewById(R.id.habit_row_card_layout).setOnClickListener(this);
     }
 
     public void setHabitProgressTime(long timeInMillis) {
@@ -46,6 +54,18 @@ public class HabitViewHolder extends RecyclerView.ViewHolder {
                 countDownInterval,
                 startedAt
         ).start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int itemId = v.getId();
+        Habit currentHabit = habitRecyclerViewAdapter
+                .getHabitList()
+                .get(getAbsoluteAdapterPosition());
+
+        if (itemId == R.id.habit_row_card_layout) {
+            onHabitClickListener.onHabitClick(currentHabit);
+        }
     }
 
     public class HabitProgressTimer extends CountDownTimer {

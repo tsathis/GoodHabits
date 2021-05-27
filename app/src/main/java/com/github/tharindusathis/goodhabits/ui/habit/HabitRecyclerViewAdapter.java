@@ -18,9 +18,11 @@ import java.util.List;
 public class HabitRecyclerViewAdapter extends RecyclerView.Adapter<HabitViewHolder> {
 
     private final List<Habit> habitList;
+    private final OnHabitClickListener onHabitClickListener;
 
-    public HabitRecyclerViewAdapter(List<Habit> habitList) {
+    public HabitRecyclerViewAdapter(List<Habit> habitList, OnHabitClickListener onHabitClickListener) {
         this.habitList = habitList;
+        this.onHabitClickListener = onHabitClickListener;
     }
 
     @NotNull
@@ -29,7 +31,7 @@ public class HabitRecyclerViewAdapter extends RecyclerView.Adapter<HabitViewHold
         View itemView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.habit_recycler_view_item, parent, false);
-        return new HabitViewHolder(itemView);
+        return new HabitViewHolder(itemView, this);
     }
 
     @Override
@@ -45,4 +47,11 @@ public class HabitRecyclerViewAdapter extends RecyclerView.Adapter<HabitViewHold
         return habitList.size();
     }
 
+    public List<Habit> getHabitList() {
+        return habitList;
+    }
+
+    public OnHabitClickListener getOnHabitClickListener() {
+        return onHabitClickListener;
+    }
 }
