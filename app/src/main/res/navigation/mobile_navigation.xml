@@ -17,4 +17,9 @@
         android:label="@string/menu_stats"
         tools:layout="@layout/fragment_stats" />
 
+    <activity
+        android:id="@+id/nav_settings"
+        android:name="com.github.tharindusathis.goodhabits.ui.SettingsActivity"
+        android:label="Settings"
+        tools:layout="@layout/settings_activity" />
 </navigation>

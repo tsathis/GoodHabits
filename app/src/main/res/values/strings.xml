@@ -13,13 +13,19 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
+    <!--pref keys-->
+    <string name="pref_theme">theme</string>
+
     <!-- Preference Titles -->
     <string name="general_header">General</string>
-    <string name="messages_header">Messages</string>
+    <string name="appearance_header">Appearance</string>
     <string name="sync_header">Sync</string>
 
     <!-- General Preferences -->
     <string name="users_name">Your name</string>
+
+    <!-- Appearance Preferences -->
+    <string name="theme_mode">Theme Mode</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
